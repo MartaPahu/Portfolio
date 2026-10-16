@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  /* Paleta Silt & Signal */
+  --color-negro: #1c1c18;
+  --color-cuero: #6b5740;
+  --color-citronella: #e8c832;
+  --color-crema: #eae0ce;
+
+  /* Fuentes: titulares, texto y serif elegante */
+  --font-display: "Archivo Black", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+  --font-serif: "Instrument Serif", serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-crema);
+  color: var(--color-negro);
+  font-family: var(--font-body);
+}
