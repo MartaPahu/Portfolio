@@ -1,7 +1,12 @@
+import { useRef } from 'react'
 import { navLinks, profile, skills } from '../data/content'
+import Crosshair from './Crosshair'
 import Marquee from './Marquee'
 
 function Hero() {
+  // La "nota adhesiva" que le dice a la retícula dónde quedarse
+  const titleRef = useRef<HTMLDivElement>(null)
+
   // "Marta Patrón" → firstName "Marta", surname "Patrón"
   const [firstName, ...rest] = profile.name.split(' ')
   const surname = rest.join(' ')
@@ -13,7 +18,11 @@ function Hero() {
     .join('.')
 
   return (
-    <section id="inicio" className="overflow-hidden bg-crema">
+    // Columna que ocupa toda la pantalla: menú arriba, contenido en medio, barra abajo
+    <section
+      id="inicio"
+      className="flex min-h-svh flex-col overflow-hidden bg-crema"
+    >
       {/* Barra superior con el menú */}
       <header className="flex items-center justify-between px-6 py-6 md:px-12">
         <span
@@ -39,9 +48,22 @@ function Hero() {
         </nav>
       </header>
 
-      {/* Titular + botones */}
-      <div className="px-6 pb-12 pt-10 md:px-12">
-        <p className="mb-6 inline-block rounded-full bg-citronella px-4 py-1 text-sm font-bold uppercase">
+      {/* Zona central: flex-1 = ocupa todo el espacio sobrante */}
+      <div
+        ref={titleRef}
+        className="relative flex flex-1 flex-col justify-center px-6 py-10 md:px-12"
+      >
+        <Crosshair
+          containerRef={titleRef}
+          color="#1c1c18"
+          thickness={1}
+          opacity={0.85}
+          smoothing={0.35}
+          showCoordinates
+          targetEffect="lock"
+        />
+
+        <p className="mb-6 inline-block self-start rounded-full bg-citronella px-4 py-1 text-sm font-bold uppercase">
           {profile.role}
         </p>
         <h1 className="break-words font-display text-[clamp(3rem,12vw,10rem)] uppercase leading-[0.9]">
@@ -65,25 +87,8 @@ function Hero() {
         </div>
       </div>
 
-      {/* Barra negra inclinada en movimiento */}
-      <div className="mb-16 -rotate-2 scale-110">
-        <Marquee items={skills} />
-      </div>
-
-      {/* Bio: titular a la izquierda, texto a la derecha */}
-      <div className="mx-auto grid max-w-6xl gap-8 px-6 pb-24 md:grid-cols-2 md:gap-16 md:px-12">
-        <h2 className="font-display text-2xl uppercase leading-tight md:text-4xl">
-          {profile.headline}
-        </h2>
-        <div>
-          <p className="font-serif text-2xl italic leading-snug md:text-3xl">
-            {profile.intro}
-          </p>
-          <p className="mt-6 text-base leading-relaxed text-cuero">
-            {profile.bio}
-          </p>
-        </div>
-      </div>
+      {/* Pie de la primera pantalla: barra recta y a todo el ancho */}
+      <Marquee items={skills} />
     </section>
   )
 }

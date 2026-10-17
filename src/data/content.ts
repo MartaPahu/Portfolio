@@ -1,4 +1,4 @@
-import type { About, NavLink, Profile, Project, Service } from '../types'
+import type { About, NavLink, Profile, Project, Service, Tool } from '../types'
 
 export const profile: Profile = {
   name: 'Marta Patrón',
@@ -13,8 +13,9 @@ export const profile: Profile = {
 
 export const navLinks: NavLink[] = [
   { label: 'Inicio', href: '#inicio' },
-  { label: 'Sobre mí', href: '#sobre-mi' },
+  { label: 'Qué hago', href: '#que-hago' },
   { label: 'Proyectos', href: '#proyectos' },
+  { label: 'Sobre mí', href: '#sobre-mi' },
   { label: 'Contacto', href: '#contacto' },
 ]
 
@@ -92,3 +93,19 @@ export const about: About = {
     'Fotografío lo que no cabe en palabras.',
   ],
 }
+
+export const tools: Tool[] = [
+  { id: 1, name: '[Illustrator]', short: 'Ai' },
+  { id: 2, name: '[InDesign]', short: 'Id' },
+  { id: 3, name: '[Photoshop]', short: 'Ps' },
+  { id: 4, name: '[Premiere]', short: '[Sg]' },
+  { id: 5, name: '[Lightroom]', short: '[Sg]' },
+  { id: 6, name: '[Figma]', short: '[Sg]' },
+  { id: 7, name: '[Canva]', short: '[Sg]' },
+  { id: 8, name: '[GitHub]', short: '[Sg]' },
+  { id: 9, name: '[HTML5]', short: '[Sg]' },
+  { id: 10, name: '[CSS]', short: '[Sg]' },
+  { id: 11, name: '[React]', short: '[Sg]' },
+  { id: 12, name: '[Python]', short: '[Sg]' }
+
+]

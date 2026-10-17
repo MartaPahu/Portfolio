@@ -32,6 +32,14 @@ export interface About {
   lines: string[]
 }
 
+// Un programa que manejas (para la fila de logos)
+export interface Tool {
+  id: number
+  name: string // nombre completo
+  short: string // siglas para el cuadrado: Ai, Ps…
+  logo?: string // ruta de un logo en /public (opcional)
+}
+
 // Tus datos personales
 export interface Profile {
   name: string
