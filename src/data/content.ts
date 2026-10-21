@@ -42,7 +42,7 @@ export const projects: Project[] = [
       'Integración completa de front y back en un equipo de unas 8 personas',
     ],
     tag: 'Prácticas en Mercanza',
-    image: '/projects/[plataforma-formacion].jpg',
+    image: asset ('/projects/mzformacion.jpeg'),
     color: 'citronella',
   },
   {
@@ -66,7 +66,7 @@ export const projects: Project[] = [
       '20 películas de directoras españolas en 4 perfiles emocionales',
       'Python + Flask, MySQL, TMDb y YouTube'],
     tag: 'Full Stack',
-    image: '/projects/[proyecto-3].jpg',
+    image: asset('/projects/videoclub.png'),
     color: 'crema',
   },
 ]
