@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { navLinks, profile, skills } from '../data/content'
 import Crosshair from './Crosshair'
 import Marquee from './Marquee'
+import MobileNav from './MobileNav'
 
 function Hero() {
   // La "nota adhesiva" que le dice a la retícula dónde quedarse
@@ -23,35 +24,43 @@ function Hero() {
       id="inicio"
       className="flex min-h-svh flex-col overflow-hidden bg-crema"
     >
-      {/* Barra superior con el menú */}
-      <header className="flex items-center justify-between px-6 py-6 md:px-12">
-        <span
-          className="font-display text-xl uppercase tracking-wide"
-          aria-label={profile.name}
-        >
-          {initials}
-        </span>
-        <nav className="hidden items-center gap-8 text-sm font-medium md:flex">
-          {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className="hover:text-cuero">
-              {link.label}
-            </a>
-          ))}
-          <a
-            href={profile.github}
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-full bg-negro px-4 py-1.5 text-crema hover:bg-cuero"
+      {/* Barra superior: z-30 para que el menú móvil quede por encima de todo */}
+      <header className="relative z-30 px-6 py-6 md:px-12">
+        {/* Menú de pantallas anchas */}
+        <div className="hidden items-center justify-between md:flex">
+          <span
+            className="font-display text-xl uppercase tracking-wide"
+            aria-label={profile.name}
           >
-            GitHub ↗
-          </a>
-        </nav>
+            {initials}
+          </span>
+          <nav className="flex items-center gap-8 text-sm font-medium">
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href} className="hover:text-cuero">
+                {link.label}
+              </a>
+            ))}
+            <a
+              href={profile.github}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full bg-negro px-4 py-1.5 text-crema hover:bg-cuero"
+            >
+              GitHub ↗
+            </a>
+          </nav>
+        </div>
+
+        {/* Menú de móvil: barra negra con tarjetas desplegables */}
+        <div className="md:hidden">
+          <MobileNav initials={initials} />
+        </div>
       </header>
 
       {/* Zona central: flex-1 = ocupa todo el espacio sobrante */}
       <div
         ref={titleRef}
-        className="relative flex flex-1 flex-col justify-center px-6 py-10 md:px-12"
+        className="relative isolate flex flex-1 flex-col justify-center px-6 py-10 md:px-12"
       >
         <Crosshair
           containerRef={titleRef}

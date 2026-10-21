@@ -6,7 +6,7 @@ export const profile: Profile = {
   headline: 'Comunicación, código y diseño',
   intro: 'Que se vea bien y funcione mejor.',
   bio: 'Soy diseñadora multimedia y trabajo entre el diseño editorial, la fotografía y el desarrollo. Me gusta que cada pieza tenga sentido de principio a fin. Busco proyectos donde diseño y código vayan de la mano.',
-  email: '[tu@email.com]',
+  email: '[martaph96@mail.com]',
   github: '[https://github.com/tu-usuario]',
   linkedin: '[https://linkedin.com/in/tu-usuario]',
 }
@@ -95,17 +95,16 @@ export const about: About = {
 }
 
 export const tools: Tool[] = [
-  { id: 1, name: '[Illustrator]', short: 'Ai' },
-  { id: 2, name: '[InDesign]', short: 'Id' },
-  { id: 3, name: '[Photoshop]', short: 'Ps' },
-  { id: 4, name: '[Premiere]', short: '[Sg]' },
-  { id: 5, name: '[Lightroom]', short: '[Sg]' },
-  { id: 6, name: '[Figma]', short: '[Sg]' },
-  { id: 7, name: '[Canva]', short: '[Sg]' },
-  { id: 8, name: '[GitHub]', short: '[Sg]' },
-  { id: 9, name: '[HTML5]', short: '[Sg]' },
-  { id: 10, name: '[CSS]', short: '[Sg]' },
-  { id: 11, name: '[React]', short: '[Sg]' },
-  { id: 12, name: '[Python]', short: '[Sg]' }
-
+  { id: 1, name: 'Illustrator', short: 'Ai' },
+  { id: 2, name: 'InDesign', short: 'Id' },
+  { id: 3, name: 'Photoshop', short: 'Ps' },
+  { id: 4, name: 'Premiere', short: 'Pr' },
+  { id: 5, name: 'Lightroom', short: 'Lr' },
+  { id: 6, name: 'Figma', short: 'Fg' },
+  { id: 7, name: 'Canva', short: 'Cv' },
+  { id: 8, name: 'GitHub', short: 'Gh' },
+  { id: 9, name: 'HTML5', short: 'H5' },
+  { id: 10, name: 'CSS', short: 'Cs' },
+  { id: 11, name: 'React', short: 'Re' },
+  { id: 12, name: 'Python', short: 'Py' },
 ]

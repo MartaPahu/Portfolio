@@ -32,7 +32,7 @@ function Intro() {
           {/* Saludo + bio */}
           <Reveal delay={0.15}>
             <h2 className="font-serif text-[clamp(4.5rem,12vw,9rem)] italic leading-none text-citronella">
-              ¡Hey!
+              ¡Hola!
             </h2>
             <p className="mt-6 font-serif text-2xl italic leading-snug md:text-3xl">
               {profile.intro}

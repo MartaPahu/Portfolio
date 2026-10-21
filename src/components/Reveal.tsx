@@ -13,7 +13,9 @@ function Reveal({ children, delay = 0, className }: RevealProps) {
       className={className}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
+      // 'some': se activa en cuanto asoma un poco del bloque (da igual lo alto que sea)
+      // margin: espera a que entren 60px, para que se vea la animación
+      viewport={{ once: true, amount: 'some', margin: '0px 0px -60px 0px' }}
       transition={{ duration: 0.7, ease: 'easeOut', delay }}
     >
       {children}
