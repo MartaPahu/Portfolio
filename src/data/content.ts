@@ -1,4 +1,6 @@
 import type { About, NavLink, Profile, Project, Service, Tool } from '../types'
+// Añade la ruta base de la web (en local "/", publicada "/Portfolio/")
+const asset = (path: string): string => `${import.meta.env.BASE_URL}${path}`
 
 export const profile: Profile = {
   name: 'Marta Patrón',
@@ -53,15 +55,17 @@ export const projects: Project[] = [
       'Manual de marca completo y web en desarrollo',
     ],
     tag: 'Proyecto de curso',
-    image: '/projects/[escena-sur].jpg',
+    image: asset('/projects/escenasur.png'),
     color: 'cuero',
   },
   {
     id: 3,
-    title: '[Proyecto 3]',
-    category: '[Categoría]',
-    points: ['[Qué hiciste]', '[Con qué tecnología]', '[Qué lograste]'],
-    tag: '[Etiqueta]',
+    title: 'Videoclub',
+    category: 'Aplicación Web',
+    points: ['Recomienda una película dirigida por una mujer según tu estado de ánimo',
+      '20 películas de directoras españolas en 4 perfiles emocionales',
+      'Python + Flask, MySQL, TMDb y YouTube'],
+    tag: 'Full Stack',
     image: '/projects/[proyecto-3].jpg',
     color: 'crema',
   },
@@ -86,7 +90,7 @@ export const services: Service[] = [
 ]
 
 export const about: About = {
-  photo: '/about/[tu-foto].jpg',
+  photo: asset('/about/marta.png'),
   lines: [
     'Diseñadora multimedia.',
     'Programo lo que diseño.',
