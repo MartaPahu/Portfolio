@@ -1,8 +1,8 @@
 import { useRef } from 'react'
-import { navLinks, profile, skills } from '../data/content'
+import { Link } from 'react-router-dom'
+import { profile, skills } from '../data/content'
 import Crosshair from './Crosshair'
 import Marquee from './Marquee'
-import MobileNav from './MobileNav'
 
 function Hero() {
   // La "nota adhesiva" que le dice a la retícula dónde quedarse
@@ -12,51 +12,12 @@ function Hero() {
   const [firstName, ...rest] = profile.name.split(' ')
   const surname = rest.join(' ')
 
-  // "Marta Patrón" → "M.P"
-  const initials = profile.name
-    .split(' ')
-    .map((word) => word[0])
-    .join('.')
-
   return (
-    // Columna que ocupa toda la pantalla: menú arriba, contenido en medio, barra abajo
+    // Ocupa lo que queda de pantalla debajo del menú fijo: contenido en medio, barra abajo
     <section
       id="inicio"
-      className="flex min-h-svh flex-col overflow-hidden bg-crema"
+      className="flex min-h-[calc(100svh-var(--header-h))] flex-col overflow-hidden bg-crema"
     >
-      {/* Barra superior: z-30 para que el menú móvil quede por encima de todo */}
-      <header className="relative z-30 px-6 py-6 md:px-12">
-        {/* Menú de pantallas anchas */}
-        <div className="hidden items-center justify-between md:flex">
-          <span
-            className="font-display text-xl uppercase tracking-wide"
-            aria-label={profile.name}
-          >
-            {initials}
-          </span>
-          <nav className="flex items-center gap-8 text-sm font-medium">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="hover:text-cuero">
-                {link.label}
-              </a>
-            ))}
-            <a
-              href={profile.github}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-full bg-negro px-4 py-1.5 text-crema hover:bg-cuero"
-            >
-              GitHub ↗
-            </a>
-          </nav>
-        </div>
-
-        {/* Menú de móvil: barra negra con tarjetas desplegables */}
-        <div className="md:hidden">
-          <MobileNav initials={initials} />
-        </div>
-      </header>
-
       {/* Zona central: flex-1 = ocupa todo el espacio sobrante */}
       <div
         ref={titleRef}
@@ -81,12 +42,12 @@ function Hero() {
         </h1>
 
         <div className="mt-10 flex flex-wrap gap-4">
-          <a
-            href="#proyectos"
+          <Link
+            to="/proyectos"
             className="rounded-full bg-negro px-8 py-3 font-bold text-crema hover:bg-cuero"
           >
             Ver proyectos
-          </a>
+          </Link>
           <a
             href="#contacto"
             className="rounded-full border-2 border-negro px-8 py-3 font-bold hover:bg-negro hover:text-crema"

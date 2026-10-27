@@ -80,7 +80,8 @@
 
 .card-nav__menu:focus-visible,
 .card-nav__logo:focus-visible,
-.card-nav__link:focus-visible {
+.card-nav__link:focus-visible,
+.card-nav__label-link:focus-visible {
   outline: 2px solid var(--cn-ring);
   outline-offset: 2px;
 }
@@ -175,24 +176,21 @@
   visibility: visible;
 }
 
+/* Las tarjetas siempre van apiladas en columna */
 .card-nav__cards {
   display: flex;
-  gap: var(--cn-gap);
-}
-
-.card-nav[data-narrow] .card-nav__cards {
   flex-direction: column;
+  gap: var(--cn-gap);
 }
 
 .card-nav__card {
   position: relative;
   display: flex;
-  flex: 1 1 0;
+  flex: none;
   flex-direction: column;
-  gap: 18px;
+  gap: 10px;
   min-width: 0;
-  min-height: var(--cn-card);
-  padding: 16px 16px 14px;
+  padding: 14px 16px;
   border-radius: calc(var(--cn-radius) - var(--cn-inset));
   box-sizing: border-box;
   background: var(--cn-tile);
@@ -200,19 +198,6 @@
   color: var(--cn-text);
   transform-origin: 50% 0;
   will-change: transform, opacity;
-}
-
-.card-nav[data-narrow] .card-nav__card {
-  flex: none;
-  min-height: 0;
-  gap: 10px;
-  padding: 14px 14px 12px;
-}
-
-.card-nav[data-narrow] .card-nav__links {
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 2px 16px;
 }
 
 .card-nav__card[data-tinted] {
@@ -225,13 +210,34 @@
   gap: 4px;
 }
 
-/* Etiqueta de cada tarjeta con tu tipografía de titulares */
+/* Título de cada tarjeta con tu tipografía de titulares */
 .card-nav__label {
+  display: block;
   font-family: var(--font-display, inherit);
   font-size: 20px;
   font-weight: 400;
   text-transform: uppercase;
   line-height: 1.1;
+}
+
+/* Cuando el título es un enlace, toda la tarjeta es pulsable */
+.card-nav__label-link {
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.card-nav__label-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.card-nav__label-link:hover {
+  opacity: 0.7;
 }
 
 .card-nav__description {
@@ -246,11 +252,15 @@
   opacity: 0.7;
 }
 
+/* Los subenlaces quedan por encima del área pulsable del título */
 .card-nav__links {
+  position: relative;
+  z-index: 1;
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-  margin: auto 0 0;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2px 16px;
+  margin: 0;
   padding: 0;
   list-style: none;
 }

@@ -13,8 +13,15 @@
   --font-serif: "Instrument Serif", serif;
 }
 
+:root {
+  /* Altura del menú fijo de arriba */
+  --header-h: 4.5rem;
+}
+
 html {
   scroll-behavior: smooth;
+  /* Al saltar a un ancla, deja sitio al menú fijo */
+  scroll-padding-top: var(--header-h);
 }
 
 body {

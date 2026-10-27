@@ -40,6 +40,21 @@ export interface Tool {
   logo?: string // ruta de un logo en /public (opcional)
 }
 
+// Una categoría de Proyectos (Código, Diseño…)
+export interface Category {
+  slug: string // lo que aparece en la dirección: /proyectos/codigo
+  label: string // el nombre que se ve
+  description: string // frase corta
+}
+
+// Un elemento del menú. "to" es una página de la web, "href" una ancla o enlace externo
+export interface NavItem {
+  label: string
+  to?: string
+  href?: string
+  children?: NavItem[] // el desplegable
+}
+
 // Tus datos personales
 export interface Profile {
   name: string

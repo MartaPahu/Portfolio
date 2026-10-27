@@ -1,43 +1,35 @@
 import { profile } from '../data/content'
+import { mainNav } from '../data/navigation'
 import CardNav from './CardNav'
 import type { CardNavItem } from './CardNav'
+import RouterLink from './RouterLink'
 
 interface MobileNavProps {
   initials: string
 }
 
+// Colores de las tarjetas, en ciclo: amarillo, marrón, crema
+const CARD_COLORS = [
+  { bgColor: '#e8c832', textColor: '#1c1c18' },
+  { bgColor: '#6b5740', textColor: '#eae0ce' },
+  { bgColor: '#eae0ce', textColor: '#1c1c18' },
+]
+
 function MobileNav({ initials }: MobileNavProps) {
   const items: CardNavItem[] = [
+    ...mainNav.map((entry, index) => ({
+      label: entry.label,
+      href: entry.to ?? entry.href,
+      links: entry.children?.map((child) => ({
+        label: child.label,
+        href: child.to,
+      })),
+      ...CARD_COLORS[index % CARD_COLORS.length],
+    })),
     {
-      label: 'Trabajo',
-      description: 'Lo que hago y lo que he hecho.',
-      bgColor: '#e8c832',
-      textColor: '#1c1c18',
-      links: [
-        { label: 'Qué hago', href: '#que-hago' },
-        { label: 'Proyectos', href: '#proyectos' },
-      ],
-    },
-    {
-      label: 'Yo',
-      description: 'Quién soy y por dónde empezar.',
-      bgColor: '#6b5740',
-      textColor: '#eae0ce',
-      links: [
-        { label: 'Inicio', href: '#inicio' },
-        { label: 'Sobre mí', href: '#sobre-mi' },
-      ],
-    },
-    {
-      label: 'Contacto',
-      description: 'Escríbeme, leo todo.',
-      bgColor: '#eae0ce',
-      textColor: '#1c1c18',
-      links: [
-        { label: 'Email', href: `mailto:${profile.email}` },
-        { label: 'GitHub', href: profile.github },
-        { label: 'LinkedIn', href: profile.linkedin },
-      ],
+      label: 'GitHub ↗',
+      href: profile.github,
+      ...CARD_COLORS[mainNav.length % CARD_COLORS.length],
     },
   ]
 
@@ -50,7 +42,8 @@ function MobileNav({ initials }: MobileNavProps) {
         </span>
       }
       logoAlt={profile.name}
-      logoHref="#inicio"
+      logoHref="/"
+      linkComponent={RouterLink}
       openText="Menú"
       closeText="Cerrar"
       cardEffect="rise"

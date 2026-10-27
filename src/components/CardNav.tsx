@@ -18,10 +18,11 @@ export interface CardNavLink {
 
 export interface CardNavItem {
   label: string
+  href?: string // si lo tiene, todo el título de la tarjeta es un enlace
   description?: string
   bgColor?: string
   textColor?: string
-  links: CardNavLink[]
+  links?: CardNavLink[] // opcional: una tarjeta puede ser solo un título
 }
 
 type CardEffect = 'rise' | 'unfold' | 'fade'
@@ -109,6 +110,7 @@ const CARDS = 'card-nav__cards'
 const CARD = 'card-nav__card'
 const CARD_HEAD = 'card-nav__card-head'
 const LABEL = 'card-nav__label'
+const LABEL_LINK = 'card-nav__label card-nav__label-link'
 const DESCRIPTION = 'card-nav__description'
 const LINKS = 'card-nav__links'
 const LINK = 'card-nav__link'
@@ -315,7 +317,7 @@ function CardNav({
     engineRef.current?.refresh()
   })
 
-  // ¿La barra es estrecha? Si lo es, las tarjetas se apilan
+  // Mide el ancho de la barra
   useLayoutEffect(() => {
     const root = rootRef.current
     if (!root) return undefined
@@ -484,63 +486,88 @@ function CardNav({
           aria-hidden={!open}
         >
           <div className={CARDS}>
-            {items.map((item, index) => (
-              <div
-                key={`${item.label}-${index}`}
-                ref={(element) => {
-                  cardRefs.current[index] = element
-                }}
-                className={CARD}
-                data-tinted={item.bgColor ? '' : undefined}
-                style={
-                  item.bgColor
-                    ? { background: item.bgColor, color: item.textColor }
-                    : undefined
-                }
-              >
-                <div className={CARD_HEAD}>
-                  <span className={LABEL}>{item.label}</span>
-                  {item.description && (
-                    <p className={DESCRIPTION}>{item.description}</p>
-                  )}
-                </div>
-                <ul className={LINKS}>
-                  {item.links.map((link, linkIndex) => (
-                    <li key={`${link.label}-${linkIndex}`}>
-                      {renderAnchor(
-                        link,
+            {items.map((item, index) => {
+              const itemLinks = item.links ?? []
+              // El título como enlace (cuando la tarjeta lleva href)
+              const titleLink: CardNavLink = {
+                label: item.label,
+                href: item.href,
+              }
+              return (
+                <div
+                  key={`${item.label}-${index}`}
+                  ref={(element) => {
+                    cardRefs.current[index] = element
+                  }}
+                  className={CARD}
+                  data-tinted={item.bgColor ? '' : undefined}
+                  style={
+                    item.bgColor
+                      ? { background: item.bgColor, color: item.textColor }
+                      : undefined
+                  }
+                >
+                  <div className={CARD_HEAD}>
+                    {item.href ? (
+                      renderAnchor(
+                        titleLink,
                         {
-                          className: LINK,
-                          'aria-label': link.ariaLabel,
+                          className: LABEL_LINK,
                           tabIndex: open ? undefined : -1,
                           onClick: (event) => {
-                            onLinkClick?.(link, item, event)
+                            onLinkClick?.(titleLink, item, event)
                             setOpen(false)
                           },
                         },
-                        <>
-                          <span className={ARROW} aria-hidden="true">
-                            <HugeiconsIcon
-                              className={ARROW_OUT}
-                              icon={ArrowUpRight01Icon}
-                              size={14}
-                              strokeWidth={2}
-                            />
-                            <HugeiconsIcon
-                              className={ARROW_IN}
-                              icon={ArrowUpRight01Icon}
-                              size={14}
-                              strokeWidth={2}
-                            />
-                          </span>
-                          {link.label}
-                        </>,
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+                        item.label,
+                      )
+                    ) : (
+                      <span className={LABEL}>{item.label}</span>
+                    )}
+                    {item.description && (
+                      <p className={DESCRIPTION}>{item.description}</p>
+                    )}
+                  </div>
+                  {itemLinks.length > 0 && (
+                    <ul className={LINKS}>
+                      {itemLinks.map((link, linkIndex) => (
+                        <li key={`${link.label}-${linkIndex}`}>
+                          {renderAnchor(
+                            link,
+                            {
+                              className: LINK,
+                              'aria-label': link.ariaLabel,
+                              tabIndex: open ? undefined : -1,
+                              onClick: (event) => {
+                                onLinkClick?.(link, item, event)
+                                setOpen(false)
+                              },
+                            },
+                            <>
+                              <span className={ARROW} aria-hidden="true">
+                                <HugeiconsIcon
+                                  className={ARROW_OUT}
+                                  icon={ArrowUpRight01Icon}
+                                  size={14}
+                                  strokeWidth={2}
+                                />
+                                <HugeiconsIcon
+                                  className={ARROW_IN}
+                                  icon={ArrowUpRight01Icon}
+                                  size={14}
+                                  strokeWidth={2}
+                                />
+                              </span>
+                              {link.label}
+                            </>,
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )
+            })}
           </div>
         </div>
         <span className={RIM} />
