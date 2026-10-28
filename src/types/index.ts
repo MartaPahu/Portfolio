@@ -19,11 +19,21 @@ export interface Project {
   color: CardColor
 }
 
-// Cada bloque de "Qué hago"
+// Cada bloque de servicios (ya no se usa en la web, se puede borrar más adelante)
 export interface Service {
   id: number
   title: string
   description: string
+}
+
+// Un ejemplo de cómo manejas un programa (para la galería de Diseño)
+export interface Example {
+  id: number
+  title: string
+  tool: string // programa: escríbelo igual en todos los ejemplos para agruparlos
+  caption: string // una línea sobre la técnica
+  media: string // imagen, GIF o vídeo (.mp4 / .webm)
+  aspect?: 'wide' | 'square' | 'tall' // forma del recuadro (opcional)
 }
 
 // La sección "Sobre mí": tu foto y un manifiesto en frases cortas

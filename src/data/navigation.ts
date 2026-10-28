@@ -1,7 +1,16 @@
 import type { Category, NavItem } from '../types'
 
-// Las categorías de Proyectos.
-// Para renombrar una (por ejemplo Diseño → Branding), cambia aquí su label.
+// Los nombres de los apartados. Cambia aquí cualquiera y se actualiza en toda la web.
+export const labels = {
+  home: 'Inicio',
+  disciplines: 'Disciplinas', // titular de la sección amarilla de Inicio
+  projects: 'Proyectos',
+  about: 'Sobre mí',
+  contact: 'Contacto',
+}
+
+// Las categorías de Proyectos (y, a la vez, tus disciplinas de Inicio).
+// Para renombrar una (por ejemplo Código → Desarrollo), cambia aquí su label.
 export const categories: Category[] = [
   {
     slug: 'codigo',
@@ -27,16 +36,15 @@ export const categories: Category[] = [
 
 // El menú principal (se usa en pantalla grande y en móvil)
 export const mainNav: NavItem[] = [
-  { label: 'Inicio', to: '/' },
-  { label: 'Qué hago', to: '/que-hago' },
+  { label: labels.home, to: '/' },
   {
-    label: 'Proyectos',
+    label: labels.projects,
     to: '/proyectos',
     children: categories.map((category) => ({
       label: category.label,
       to: `/proyectos/${category.slug}`,
     })),
   },
-  { label: 'Sobre mí', to: '/sobre-mi' },
-  { label: 'Contacto', href: '#contacto' },
+  { label: labels.about, to: '/sobre-mi' },
+  { label: labels.contact, href: '#contacto' },
 ]

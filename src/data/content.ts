@@ -1,4 +1,12 @@
-import type { About, NavLink, Profile, Project, Service, Tool } from '../types'
+import type {
+  About,
+  Example,
+  NavLink,
+  Profile,
+  Project,
+  Service,
+  Tool,
+} from '../types'
 // Añade la ruta base de la web (en local "/", publicada "/Portfolio/")
 const asset = (path: string): string => `${import.meta.env.BASE_URL}${path}`
 
@@ -111,4 +119,54 @@ export const tools: Tool[] = [
   { id: 10, name: 'CSS', short: 'Cs' },
   { id: 11, name: 'React', short: 'Re' },
   { id: 12, name: 'Python', short: 'Py' },
+]
+export const examples: Example[] = [
+  {
+    id: 1,
+    title: '[Título del ejemplo]',
+    tool: 'Illustrator',
+    caption: '[Qué técnica muestras]',
+    media: asset('examples/illustrator-1.gif'),
+    aspect: 'wide',
+  },
+  {
+    id: 2,
+    title: '[Título del ejemplo]',
+    tool: 'Photoshop',
+    caption: '[Qué técnica muestras]',
+    media: asset('examples/photoshop-1.jpg'),
+    aspect: 'tall',
+  },
+  {
+    id: 3,
+    title: '[Título del ejemplo]',
+    tool: 'Premiere',
+    caption: '[Qué técnica muestras]',
+    media: asset('examples/premiere-1.mp4'),
+    aspect: 'wide',
+  },
+  {
+    id: 4,
+    title: '[Título del ejemplo]',
+    tool: 'Canva',
+    caption: '[Qué técnica muestras]',
+    media: asset('examples/canva-1.jpg'),
+    aspect: 'square',
+  },
+  {
+    id: 5,
+    title: '[Título del ejemplo]',
+    tool: 'Illustrator',
+    caption: '[Qué técnica muestras]',
+    media: asset('examples/illustrator-2.jpg'),
+    aspect: 'square',
+  },
+  {
+    id: 6,
+    title: '[Título del ejemplo]',
+    tool: 'Photoshop',
+    caption: '[Qué técnica muestras]',
+    media: asset('examples/photoshop-2.gif'),
+    aspect: 'wide',
+  },
 ]
